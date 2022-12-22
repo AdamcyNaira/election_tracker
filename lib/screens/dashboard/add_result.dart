@@ -19,6 +19,7 @@ class AddResult extends ConsumerStatefulWidget {
 class _AddResultState extends ConsumerState<AddResult> {
   // ignore: unused_field
   bool _isLoading = true;
+  bool isFormLoading = false;
 
   double _uploadingPercentage = 0;
 
@@ -243,7 +244,7 @@ class _AddResultState extends ConsumerState<AddResult> {
                               apc_val = val!;
                             });
                           },
-                          keyboardType: TextInputType.text,
+                          keyboardType: TextInputType.number,
                           hintText: 'APC',
                         ),
                          const YMargin(5),
@@ -255,7 +256,7 @@ class _AddResultState extends ConsumerState<AddResult> {
                               pdp_val = val!;
                             });
                           },
-                          keyboardType: TextInputType.text,
+                          keyboardType: TextInputType.number,
                           hintText: 'PDP',
                         ),
                          const YMargin(5),
@@ -267,7 +268,7 @@ class _AddResultState extends ConsumerState<AddResult> {
                               prp_val = val!;
                             });
                           },
-                          keyboardType: TextInputType.text,
+                          keyboardType: TextInputType.number,
                           hintText: 'PRP',
                         ),
                          const YMargin(5),
@@ -279,7 +280,7 @@ class _AddResultState extends ConsumerState<AddResult> {
                               lp_val = val!;
                             });
                           },
-                          keyboardType: TextInputType.text,
+                          keyboardType: TextInputType.number,
                           hintText: 'LP',
                         ),
                         const YMargin(5),
@@ -404,10 +405,25 @@ class _AddResultState extends ConsumerState<AddResult> {
       "prp": prp_val,
     };
 
+    setState(() {
+          isFormLoading = true;
+        });
+        isFormLoading
+            ? showLoadingDialog(context)
+            : Navigator.of(context, rootNavigator: true).pop('dialog');
+
+
     //API CALL RESPONSE
     final responceRes = await Services.postResult(formData);
 
-    if (responceRes["status"]) {
+    if (responceRes["status"] !=null) {
+      setState(() {
+          isFormLoading = false;
+        });
+        isFormLoading
+            ? showLoadingDialog(context)
+            : Navigator.of(context, rootNavigator: true).pop('dialog');
+
       showSuccessDialog(
         context: context,
         msg: "Election Result sent successfully!",
@@ -427,7 +443,27 @@ class _AddResultState extends ConsumerState<AddResult> {
       pdp.text = "";
       prp.text = "";
       caption.text = "";
+    }else if(responceRes["code"] !=null){
+      setState(() {
+          isFormLoading = false;
+        });
+        isFormLoading
+            ? showLoadingDialog(context)
+            : Navigator.of(context, rootNavigator: true).pop('dialog');
+
+       showErrorDialog(
+          context: context,
+          msg: "Result has been entered for selected poling unit",
+          title: "Duplicate entry!");
+      return false;
     }else{
+      setState(() {
+          isFormLoading = false;
+        });
+        isFormLoading
+            ? showLoadingDialog(context)
+            : Navigator.of(context, rootNavigator: true).pop('dialog');
+
        showErrorDialog(
           context: context,
           msg: "Something Went Wrong, Please Try Again!",

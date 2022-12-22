@@ -29,6 +29,7 @@ class _AddIncidenceState extends ConsumerState<AddIncidence> {
 
   // ignore: prefer_final_fields
   bool isLoading = true;
+  bool isFormLoading = false;
   TextEditingController incidentCode = TextEditingController();
   TextEditingController puCode = TextEditingController();
   TextEditingController mediaType = TextEditingController();
@@ -339,10 +340,23 @@ class _AddIncidenceState extends ConsumerState<AddIncidence> {
       "caption": caption_Val,
     };
 
+    setState(() {
+          isFormLoading = true;
+        });
+        isFormLoading
+            ? showLoadingDialog(context)
+            : Navigator.of(context, rootNavigator: true).pop('dialog');
+
     //API CALL RESPONSE
     final responceRes = await Services.postIncidenceReport(formData);
 
     if (responceRes["status"]) {
+      setState(() {
+          isFormLoading = false;
+        });
+        isFormLoading
+            ? showLoadingDialog(context)
+            : Navigator.of(context, rootNavigator: true).pop('dialog');
       showSuccessDialog(
         context: context,
         msg: "Incidence Report sent successfully!",
@@ -359,6 +373,17 @@ class _AddIncidenceState extends ConsumerState<AddIncidence> {
       mediaType.text = "";
       mediaUrl.text = "";
       caption.text = "";
+    }else{
+      setState(() {
+          isFormLoading = false;
+        });
+        isFormLoading
+            ? showLoadingDialog(context)
+            : Navigator.of(context, rootNavigator: true).pop('dialog');
+      showErrorDialog(
+          context: context,
+          msg: "Something Went Wrong, Please Try Again!",
+          title: "ERROR!");
     }
   }
 }

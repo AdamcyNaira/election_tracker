@@ -74,7 +74,7 @@ void showLoadingDialog(context) {
       return AlertDialog(
         content: Row(
           children: const <Widget>[
-            CircularProgressIndicator(),
+            CircularProgressIndicator(color: Constants.kPrimaryColor,),
             SizedBox(
               width: 25.0,
             ),
