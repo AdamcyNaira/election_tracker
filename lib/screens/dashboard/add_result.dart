@@ -276,15 +276,15 @@ class _AddResultState extends ConsumerState<AddResult> {
                         buildTextInput(
                           controller: lp,
                           onChanged: (val) {
-                            setState(() {
-                              lp_val = val!;
+                            setState(() { 
+                              lp_val = val!; 
                             });
                           },
                           keyboardType: TextInputType.number,
                           hintText: 'LP',
                         ),
                         const YMargin(5),
-                        inputLabel(title: 'Description'),
+                        inputLabel(title:'Description'),
                         buildTextInput(
                           controller: caption,
                           onChanged: (val) {
