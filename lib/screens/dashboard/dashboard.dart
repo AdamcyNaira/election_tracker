@@ -56,7 +56,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
                           style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'Quando',
-                              fontSize: 18.0,
+                              fontSize: 16.0,
                               fontWeight: FontWeight.w700),
                         ),
                         SizedBox(
@@ -67,7 +67,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'raleway',
-                            fontSize: 14,
+                            fontSize: 16,
                           ),
                         ),
                       ],
@@ -99,7 +99,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
                     "Incidence Report ",
                     Ionicons.list_outline,
                     () {
-                    Navigator.pushNamed(context, '/incidence_report');
+                    Navigator.pushNamed(context, '/add_incidence');
                     },
                   ),
                   menuCard(
@@ -108,7 +108,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
                     Ionicons.paper_plane_outline,
                     () {
                        //Constants.sharedPref!.setBool("isLoggedIn", false);
-                    Navigator.pushNamed(context, '/election_report');
+                    Navigator.pushNamed(context, '/add_result');
                     },
                   ),
                   menuCard(
@@ -148,7 +148,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
             Text(
               text,
               style: TextStyle(
-                fontSize: 12.0,
+                fontSize: 14.0,
                 fontFamily: 'Quando',
                 color: Colors.black54,
               ),

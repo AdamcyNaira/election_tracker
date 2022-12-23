@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:async';
+import 'dart:math';
 import 'dart:typed_data';
 import 'package:cloudinary_sdk/cloudinary_sdk.dart';
 import 'package:flutter/material.dart';
@@ -144,7 +145,7 @@ var spinKitRing = const SpinKitDualRing(
   color: Colors.black54,
   size: 15.0, 
 );
-    final queryParameters = '09163347700';
+    final queryParameters = userPhone;
 
 String status = "Live";
 String serverLink = status == "Dev"
@@ -196,6 +197,9 @@ var header = {
         }
     ];
 
+List election_types = [{
+ "party_id": "APC",
+},];
 
   List result_type_list = [
         {
@@ -218,9 +222,17 @@ var header = {
 
   List<String> type = [
     'Select Media Type',
+    'Audio',
+    'Text',
     'Image',
     'Video',
   ];
+
+  const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+  Random _rnd = Random();
+
+String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
+    length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 
 
 DropdownMenuItem<String> buildMenuItem(String item) =>

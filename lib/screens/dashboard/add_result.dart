@@ -106,7 +106,7 @@ class _AddResultState extends ConsumerState<AddResult> {
                       children: [
                         const YMargin(10),
                         const YMargin(5),
-                        inputLabel(title: 'Electiion Type'),
+                        inputLabel(title: 'Election Type'),
                         buildDropDownBtn(
                           controller: election_type ,
                           onChanged: (newValue) {
@@ -198,14 +198,13 @@ class _AddResultState extends ConsumerState<AddResult> {
                                     filePath: file.path,
                                     fileBytes: file.readAsBytesSync(),
                                     resourceType: CloudinaryResourceType.auto,
-                                    folder: "Inec-Uploads",
+                                    folder: getRandomString(20).toString(),
                                     fileName: 'some-name',
                                     progressCallback: (count, total) {
                                       setState(() {
                                         _uploadingPercentage = count / total;
                                       });
-                                      print(
-                                          'Uploading image from file with progress: $count/$total');
+                                      print('Uploading image from file with progress: $count/$total');
                                     },
                                   ),
                                 );

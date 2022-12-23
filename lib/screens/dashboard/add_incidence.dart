@@ -219,7 +219,7 @@ class _AddIncidenceState extends ConsumerState<AddIncidence> {
                                     fileBytes: file.readAsBytesSync(),
                                     resourceType: CloudinaryResourceType.auto,
                                     folder: "Inec-Uploads",
-                                    fileName: 'some-name',
+                                    fileName: getRandomString(20).toString(),
                                     progressCallback: (count, total) {
                                       setState(() {
                                         _uploadingPercentage = count / total;
